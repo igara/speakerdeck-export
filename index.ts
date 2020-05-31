@@ -2,7 +2,7 @@ import * as speakerdeck from "@src/speakerdeck";
 
 process.setMaxListeners(0);
 
-export const exec = async (userID: string) => {
+const exec = async (userID: string) => {
   const decks = await speakerdeck.decks(userID);
 
   await Promise.all(

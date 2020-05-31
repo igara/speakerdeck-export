@@ -10,19 +10,18 @@
   "plugins": [
     "@typescript-eslint",
     "prettier",
-    "simple-import-sort",
-    "jest"
+    "simple-import-sort"
   ],
   "parserOptions": {
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
   "env": {
-    "node": true,
-    "jest/globals": true
+    "node": true
   },
   "rules": {
     "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "prettier/prettier": ["error"],
     "simple-import-sort/sort": "error",
     "@typescript-eslint/no-var-requires": "off"

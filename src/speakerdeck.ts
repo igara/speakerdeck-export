@@ -1,7 +1,7 @@
+import * as childProcess from "child_process";
 import * as fs from "fs";
 import * as puppeteer from "puppeteer";
 import * as request from "request-promise";
-import * as childProcess from "child_process";
 
 type Deck = {
   userID: string;
@@ -69,15 +69,13 @@ export const decks = async (userID: string) => {
   return decks;
 };
 
-
-export const downloadDeck = async(deck: Deck) => {
+export const downloadDeck = async (deck: Deck) => {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
   await page.setDefaultNavigationTimeout(0);
   await page.goto(deck.url, { waitUntil: "networkidle0" });
   await page.waitFor(1000);
-
 
   const link = await page.evaluate(() => {
     const downloadLinkElement = document.querySelector(`a[title="Download PDF"]`);
@@ -97,4 +95,4 @@ export const downloadDeck = async(deck: Deck) => {
 
     childProcess.execSync(`convert "${pdfFileName}" "./data/${directoryName(deck)}/page_%04d.jpg"`);
   });
-}
+};
