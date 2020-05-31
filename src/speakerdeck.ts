@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import * as puppeteer from "puppeteer";
 import * as request from "request-promise";
+import * as childProcess from "child_process";
 
 type Deck = {
   userID: string;
@@ -86,11 +87,14 @@ export const downloadDeck = async(deck: Deck) => {
   await page.close();
   await browser.close();
 
+  const pdfFileName = `./data/${directoryName(deck)}/index.pdf`;
   request({
     url: link,
     method: "GET",
     encoding: null,
   }).then((pdf) => {
-    fs.writeFileSync(`./data/${directoryName(deck)}/index.pdf`, pdf, "binary");
+    fs.writeFileSync(pdfFileName, pdf, "binary");
+
+    childProcess.execSync(`convert "${pdfFileName}" "./data/${directoryName(deck)}/page_%04d.jpg"`);
   });
 }
