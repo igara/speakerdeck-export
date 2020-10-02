@@ -31,7 +31,7 @@ const getDeckLink = async (page: puppeteer.Page, userID: string) =>
         userID,
         title: link.getAttribute("title"),
         url,
-        createAt: `${dateYear}-${dateMonth}-${dateDay} 00:00:00`,
+        createAt: `${dateYear}-${dateMonth}-${dateDay} 00-00-00`,
       };
     });
   }, userID);
